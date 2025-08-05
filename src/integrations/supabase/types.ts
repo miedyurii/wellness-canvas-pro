@@ -59,6 +59,129 @@ export type Database = {
         }
         Relationships: []
       }
+      health_benchmarks: {
+        Row: {
+          age_range: string
+          bmi_p25: number
+          bmi_p50: number
+          bmi_p75: number
+          gender: string
+          healthy_range_max: number
+          healthy_range_min: number
+          id: string
+        }
+        Insert: {
+          age_range: string
+          bmi_p25: number
+          bmi_p50: number
+          bmi_p75: number
+          gender: string
+          healthy_range_max: number
+          healthy_range_min: number
+          id?: string
+        }
+        Update: {
+          age_range?: string
+          bmi_p25?: number
+          bmi_p50?: number
+          bmi_p75?: number
+          gender?: string
+          healthy_range_max?: number
+          healthy_range_min?: number
+          id?: string
+        }
+        Relationships: []
+      }
+      health_goals: {
+        Row: {
+          created_at: string
+          goal_type: string
+          id: string
+          is_active: boolean
+          target_date: string | null
+          target_value: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          goal_type: string
+          id?: string
+          is_active?: boolean
+          target_date?: string | null
+          target_value: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          goal_type?: string
+          id?: string
+          is_active?: boolean
+          target_date?: string | null
+          target_value?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      milestones: {
+        Row: {
+          achieved_at: string
+          achievement_name: string
+          badge_color: string | null
+          id: string
+          metric_value: number | null
+          milestone_type: string
+          user_id: string
+        }
+        Insert: {
+          achieved_at?: string
+          achievement_name: string
+          badge_color?: string | null
+          id?: string
+          metric_value?: number | null
+          milestone_type: string
+          user_id: string
+        }
+        Update: {
+          achieved_at?: string
+          achievement_name?: string
+          badge_color?: string | null
+          id?: string
+          metric_value?: number | null
+          milestone_type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_preferences: {
+        Row: {
+          chart_theme: string
+          created_at: string
+          default_metrics: string[]
+          preferred_timeframe: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          chart_theme?: string
+          created_at?: string
+          default_metrics?: string[]
+          preferred_timeframe?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          chart_theme?: string
+          created_at?: string
+          default_metrics?: string[]
+          preferred_timeframe?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_profiles: {
         Row: {
           age: number | null

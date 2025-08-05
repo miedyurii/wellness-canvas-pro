@@ -1,4 +1,4 @@
-import { Calculator, History, BarChart3, User, MoreHorizontal } from 'lucide-react';
+import { Calculator, History, BarChart3, TrendingUp, User, MoreHorizontal } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
@@ -6,8 +6,8 @@ const navigationItems = [
   { icon: Calculator, label: 'Calculator', href: '/' },
   { icon: History, label: 'History', href: '/history' },
   { icon: BarChart3, label: 'Dashboard', href: '/dashboard' },
+  { icon: TrendingUp, label: 'Analytics', href: '/analytics' },
   { icon: User, label: 'Profile', href: '/profile' },
-  { icon: MoreHorizontal, label: 'More', href: '/more' },
 ];
 
 export const BottomNavigation = () => {
