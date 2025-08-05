@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
+import { performSecureSignOut, performSecureSignIn } from '@/utils/authCleanup';
 
 interface AuthContextType {
   user: User | null;
@@ -94,10 +95,30 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    // Input validation
+    if (!email || !password) {
+      const error = { message: "Email and password are required" };
+      toast({
+        title: "Sign in failed",
+        description: error.message,
+        variant: "destructive",
+      });
+      return { error };
+    }
+
+    // Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      const error = { message: "Please enter a valid email address" };
+      toast({
+        title: "Sign in failed",
+        description: error.message,
+        variant: "destructive",
+      });
+      return { error };
+    }
+
+    const { error } = await performSecureSignIn(supabase, email, password);
 
     if (error) {
       toast({
@@ -111,17 +132,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    
-    if (error) {
+    try {
+      await performSecureSignOut(supabase);
+      return { error: null };
+    } catch (error: any) {
       toast({
         title: "Sign out failed",
         description: error.message,
         variant: "destructive",
       });
+      return { error };
     }
-
-    return { error };
   };
 
   const value = {

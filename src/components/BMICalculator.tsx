@@ -29,15 +29,78 @@ export const BMICalculator = () => {
   const [result, setResult] = useState<BMIResult | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const calculateBMI = () => {
+  const validateInputs = () => {
+    const heightNum = parseFloat(height);
+    const weightNum = parseFloat(weight);
+    const ageNum = parseInt(age);
+
+    // Basic presence check
     if (!height || !weight) {
       toast({
         title: "Missing information",
         description: "Please enter both height and weight.",
         variant: "destructive",
       });
-      return;
+      return false;
     }
+
+    // Height validation
+    if (units === 'metric') {
+      if (heightNum < 50 || heightNum > 300) {
+        toast({
+          title: "Invalid height",
+          description: "Height must be between 50-300 cm.",
+          variant: "destructive",
+        });
+        return false;
+      }
+    } else {
+      if (heightNum < 20 || heightNum > 120) {
+        toast({
+          title: "Invalid height",
+          description: "Height must be between 20-120 inches.",
+          variant: "destructive",
+        });
+        return false;
+      }
+    }
+
+    // Weight validation
+    if (units === 'metric') {
+      if (weightNum < 1 || weightNum > 1000) {
+        toast({
+          title: "Invalid weight",
+          description: "Weight must be between 1-1000 kg.",
+          variant: "destructive",
+        });
+        return false;
+      }
+    } else {
+      if (weightNum < 2 || weightNum > 2200) {
+        toast({
+          title: "Invalid weight",
+          description: "Weight must be between 2-2200 lbs.",
+          variant: "destructive",
+        });
+        return false;
+      }
+    }
+
+    // Age validation (if provided)
+    if (age && (ageNum < 13 || ageNum > 120)) {
+      toast({
+        title: "Invalid age",
+        description: "Age must be between 13-120 years.",
+        variant: "destructive",
+      });
+      return false;
+    }
+
+    return true;
+  };
+
+  const calculateBMI = () => {
+    if (!validateInputs()) return;
 
     let heightCm = parseFloat(height);
     let weightKg = parseFloat(weight);
@@ -157,6 +220,13 @@ export const BMICalculator = () => {
 
   const shareResult = async () => {
     if (!result) return;
+
+    // Security notice for data sharing
+    const confirmed = window.confirm(
+      "You're about to share your BMI data. This will include your BMI value and category. Continue?"
+    );
+    
+    if (!confirmed) return;
 
     const shareText = `My BMI is ${result.bmi} (${result.category}). Check out this Health & BMI Tracker app!`;
     
