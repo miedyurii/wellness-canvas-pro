@@ -14,7 +14,93 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bmi_measurements: {
+        Row: {
+          bmi: number
+          body_fat_percent: number | null
+          category: string
+          created_at: string
+          date: string
+          formula: string
+          height_cm: number
+          id: string
+          notes: string | null
+          updated_at: string
+          user_id: string
+          weight_kg: number
+        }
+        Insert: {
+          bmi: number
+          body_fat_percent?: number | null
+          category: string
+          created_at?: string
+          date?: string
+          formula?: string
+          height_cm: number
+          id?: string
+          notes?: string | null
+          updated_at?: string
+          user_id: string
+          weight_kg: number
+        }
+        Update: {
+          bmi?: number
+          body_fat_percent?: number | null
+          category?: string
+          created_at?: string
+          date?: string
+          formula?: string
+          height_cm?: number
+          id?: string
+          notes?: string | null
+          updated_at?: string
+          user_id?: string
+          weight_kg?: number
+        }
+        Relationships: []
+      }
+      user_profiles: {
+        Row: {
+          age: number | null
+          created_at: string
+          email: string | null
+          first_name: string | null
+          gender: string | null
+          goal: string | null
+          height_cm: number | null
+          id: string
+          last_name: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          age?: number | null
+          created_at?: string
+          email?: string | null
+          first_name?: string | null
+          gender?: string | null
+          goal?: string | null
+          height_cm?: number | null
+          id?: string
+          last_name?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          age?: number | null
+          created_at?: string
+          email?: string | null
+          first_name?: string | null
+          gender?: string | null
+          goal?: string | null
+          height_cm?: number | null
+          id?: string
+          last_name?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
