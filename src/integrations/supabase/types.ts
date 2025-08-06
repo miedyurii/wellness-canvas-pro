@@ -59,6 +59,51 @@ export type Database = {
         }
         Relationships: []
       }
+      daily_nutrition_summary: {
+        Row: {
+          created_at: string
+          date: string
+          id: string
+          total_calories: number
+          total_carbs: number
+          total_fat: number
+          total_fiber: number | null
+          total_protein: number
+          total_sodium: number | null
+          total_sugar: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          date?: string
+          id?: string
+          total_calories?: number
+          total_carbs?: number
+          total_fat?: number
+          total_fiber?: number | null
+          total_protein?: number
+          total_sodium?: number | null
+          total_sugar?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          id?: string
+          total_calories?: number
+          total_carbs?: number
+          total_fat?: number
+          total_fiber?: number | null
+          total_protein?: number
+          total_sodium?: number | null
+          total_sugar?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       health_benchmarks: {
         Row: {
           age_range: string
@@ -152,6 +197,114 @@ export type Database = {
           metric_value?: number | null
           milestone_type?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      nutrition_logs: {
+        Row: {
+          calories: number
+          carbs: number
+          created_at: string
+          date: string
+          external_food_id: string | null
+          fat: number
+          fiber: number | null
+          food_name: string
+          id: string
+          meal_type: string
+          protein: number
+          quantity: number
+          sodium: number | null
+          sugar: number | null
+          unit: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          calories: number
+          carbs?: number
+          created_at?: string
+          date?: string
+          external_food_id?: string | null
+          fat?: number
+          fiber?: number | null
+          food_name: string
+          id?: string
+          meal_type: string
+          protein?: number
+          quantity?: number
+          sodium?: number | null
+          sugar?: number | null
+          unit?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          calories?: number
+          carbs?: number
+          created_at?: string
+          date?: string
+          external_food_id?: string | null
+          fat?: number
+          fiber?: number | null
+          food_name?: string
+          id?: string
+          meal_type?: string
+          protein?: number
+          quantity?: number
+          sodium?: number | null
+          sugar?: number | null
+          unit?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_goals: {
+        Row: {
+          activity_level: string
+          created_at: string
+          dietary_restrictions: string[] | null
+          fitness_goal: string
+          id: string
+          onboarding_completed: boolean
+          target_calories: number | null
+          target_carbs: number | null
+          target_fat: number | null
+          target_protein: number | null
+          updated_at: string
+          user_id: string
+          workout_style: string
+        }
+        Insert: {
+          activity_level?: string
+          created_at?: string
+          dietary_restrictions?: string[] | null
+          fitness_goal: string
+          id?: string
+          onboarding_completed?: boolean
+          target_calories?: number | null
+          target_carbs?: number | null
+          target_fat?: number | null
+          target_protein?: number | null
+          updated_at?: string
+          user_id: string
+          workout_style: string
+        }
+        Update: {
+          activity_level?: string
+          created_at?: string
+          dietary_restrictions?: string[] | null
+          fitness_goal?: string
+          id?: string
+          onboarding_completed?: boolean
+          target_calories?: number | null
+          target_carbs?: number | null
+          target_fat?: number | null
+          target_protein?: number | null
+          updated_at?: string
+          user_id?: string
+          workout_style?: string
         }
         Relationships: []
       }

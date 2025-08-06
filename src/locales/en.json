@@ -1,0 +1,82 @@
+{
+  "common": {
+    "next": "Next",
+    "back": "Back",
+    "complete": "Complete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "loading": "Loading...",
+    "error": "An error occurred"
+  },
+  "onboarding": {
+    "title": "Welcome to Your Wellness Journey",
+    "subtitle": "Let's personalize your experience",
+    "step1": {
+      "title": "What's your primary fitness goal?",
+      "weight_loss": "Weight Loss",
+      "muscle_gain": "Muscle Gain", 
+      "maintain": "Maintain Current Weight",
+      "endurance": "Build Endurance"
+    },
+    "step2": {
+      "title": "What's your preferred workout style?",
+      "cardio": "Cardio & Running",
+      "strength": "Strength Training",
+      "yoga": "Yoga & Flexibility",
+      "mixed": "Mixed Training"
+    },
+    "step3": {
+      "title": "Do you have any dietary restrictions?",
+      "vegetarian": "Vegetarian",
+      "vegan": "Vegan",
+      "gluten_free": "Gluten-Free",
+      "dairy_free": "Dairy-Free",
+      "keto": "Ketogenic",
+      "paleo": "Paleo",
+      "none": "No restrictions"
+    },
+    "activity_level": {
+      "title": "How active are you?",
+      "sedentary": "Sedentary (desk job, no exercise)",
+      "light": "Light (1-3 days/week exercise)",
+      "moderate": "Moderate (3-5 days/week exercise)",
+      "active": "Active (6-7 days/week exercise)",
+      "very_active": "Very Active (2x/day, intense)"
+    }
+  },
+  "nutrition": {
+    "title": "Nutrition Tracker",
+    "daily_goals": "Daily Goals",
+    "calories": "Calories",
+    "protein": "Protein",
+    "carbs": "Carbs", 
+    "fat": "Fat",
+    "add_meal": "Add Meal",
+    "breakfast": "Breakfast",
+    "lunch": "Lunch",
+    "dinner": "Dinner",
+    "snack": "Snack",
+    "food_search": "Search for food...",
+    "quantity": "Quantity",
+    "unit": "Unit",
+    "macros_breakdown": "Macros Breakdown",
+    "daily_summary": "Today's Summary"
+  },
+  "settings": {
+    "title": "Settings",
+    "profile": "Profile",
+    "notifications": "Notifications",
+    "language": "Language",
+    "privacy": "Privacy",
+    "integrations": "Integrations"
+  },
+  "nav": {
+    "home": "Home",
+    "history": "History", 
+    "dashboard": "Dashboard",
+    "analytics": "Analytics",
+    "settings": "Settings"
+  }
+}

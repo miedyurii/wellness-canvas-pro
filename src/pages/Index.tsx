@@ -1,11 +1,21 @@
 import { BMICalculator } from '@/components/BMICalculator';
+import { OnboardingWizard } from '@/components/OnboardingWizard';
 import { BottomNavigation } from '@/components/BottomNavigation';
 import { useAuth } from '@/contexts/AuthContext';
+import { useUserGoals } from '@/contexts/UserGoalsContext';
+import { useI18n } from '@/contexts/I18nContext';
 import { Button } from '@/components/ui/button';
 import { Heart, UserPlus } from 'lucide-react';
 
 const Index = () => {
   const { user } = useAuth();
+  const { userGoals, loading } = useUserGoals();
+  const { t } = useI18n();
+
+  // Show onboarding wizard if user is logged in but hasn't completed onboarding
+  if (user && !loading && (!userGoals || !userGoals.onboarding_completed)) {
+    return <OnboardingWizard onComplete={() => window.location.reload()} />;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted/20 pb-20">

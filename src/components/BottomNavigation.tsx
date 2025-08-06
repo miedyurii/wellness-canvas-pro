@@ -1,16 +1,19 @@
-import { Calculator, History, BarChart3, TrendingUp, User, MoreHorizontal } from 'lucide-react';
+import { Calculator, History, BarChart3, TrendingUp, Apple, Settings } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-
-const navigationItems = [
-  { icon: Calculator, label: 'Calculator', href: '/' },
-  { icon: History, label: 'History', href: '/history' },
-  { icon: BarChart3, label: 'Dashboard', href: '/dashboard' },
-  { icon: TrendingUp, label: 'Analytics', href: '/analytics' },
-  { icon: User, label: 'Profile', href: '/profile' },
-];
+import { useI18n } from '@/contexts/I18nContext';
 
 export const BottomNavigation = () => {
+  const { t } = useI18n();
+  
+  const navigationItems = [
+    { icon: Calculator, label: t('nav.home'), href: '/' },
+    { icon: History, label: t('nav.history'), href: '/history' },
+    { icon: BarChart3, label: t('nav.dashboard'), href: '/dashboard' },
+    { icon: Apple, label: 'Nutrition', href: '/nutrition' },
+    { icon: Settings, label: t('nav.settings'), href: '/settings' },
+  ];
+
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-md border-t border-border/50 safe-area-bottom">
       <div className="flex items-center justify-around h-16 px-4">
