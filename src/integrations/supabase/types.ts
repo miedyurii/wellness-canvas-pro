@@ -170,6 +170,78 @@ export type Database = {
         }
         Relationships: []
       }
+      integrations: {
+        Row: {
+          apple_health_enabled: boolean
+          created_at: string
+          fitness_tracker_enabled: boolean
+          google_fit_enabled: boolean
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          apple_health_enabled?: boolean
+          created_at?: string
+          fitness_tracker_enabled?: boolean
+          google_fit_enabled?: boolean
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          apple_health_enabled?: boolean
+          created_at?: string
+          fitness_tracker_enabled?: boolean
+          google_fit_enabled?: boolean
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      meal_presets: {
+        Row: {
+          created_at: string
+          foods: Json
+          id: string
+          meal_type: string
+          name: string
+          total_calories: number
+          total_carbs: number
+          total_fat: number
+          total_protein: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          foods?: Json
+          id?: string
+          meal_type: string
+          name: string
+          total_calories?: number
+          total_carbs?: number
+          total_fat?: number
+          total_protein?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          foods?: Json
+          id?: string
+          meal_type?: string
+          name?: string
+          total_calories?: number
+          total_carbs?: number
+          total_fat?: number
+          total_protein?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       milestones: {
         Row: {
           achieved_at: string
@@ -197,6 +269,42 @@ export type Database = {
           metric_value?: number | null
           milestone_type?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      notification_prefs: {
+        Row: {
+          created_at: string
+          email_notifications: boolean
+          id: string
+          nutrition_reminders: boolean
+          onesignal_player_id: string | null
+          push_notifications: boolean
+          updated_at: string
+          user_id: string
+          workout_reminders: boolean
+        }
+        Insert: {
+          created_at?: string
+          email_notifications?: boolean
+          id?: string
+          nutrition_reminders?: boolean
+          onesignal_player_id?: string | null
+          push_notifications?: boolean
+          updated_at?: string
+          user_id: string
+          workout_reminders?: boolean
+        }
+        Update: {
+          created_at?: string
+          email_notifications?: boolean
+          id?: string
+          nutrition_reminders?: boolean
+          onesignal_player_id?: string | null
+          push_notifications?: boolean
+          updated_at?: string
+          user_id?: string
+          workout_reminders?: boolean
         }
         Relationships: []
       }

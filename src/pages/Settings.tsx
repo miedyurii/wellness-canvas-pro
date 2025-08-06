@@ -5,11 +5,16 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { BottomNavigation } from '@/components/BottomNavigation';
 import { useI18n } from '@/contexts/I18nContext';
 import { useAuth } from '@/contexts/AuthContext';
-import { Settings as SettingsIcon, User, Bell, Globe, Shield, Link } from 'lucide-react';
+import { useSettings } from '@/contexts/SettingsContext';
+import { ProfileSettingsModal } from '@/components/settings/ProfileSettingsModal';
+import { NotificationSettingsModal } from '@/components/settings/NotificationSettingsModal';
+import { IntegrationSettingsModal } from '@/components/settings/IntegrationSettingsModal';
+import { Settings as SettingsIcon, User, Bell, Globe, Shield, Link, ChevronRight } from 'lucide-react';
 
 const Settings = () => {
   const { t, language, setLanguage } = useI18n();
   const { user, signOut } = useAuth();
+  const { loading } = useSettings();
 
   const handleSignOut = async () => {
     try {
@@ -24,36 +29,54 @@ const Settings = () => {
       title: t('settings.profile'),
       icon: User,
       items: [
-        { label: 'Edit Profile', action: () => {} },
-        { label: 'Health Goals', action: () => {} },
-        { label: 'Personal Information', action: () => {} },
+        { 
+          label: t('settings.edit_profile'), 
+          component: ProfileSettingsModal,
+          description: t('settings.personal_info')
+        },
+        { 
+          label: t('settings.health_goals'), 
+          action: () => console.log('Health goals'),
+          description: 'Manage your fitness and nutrition goals'
+        },
       ]
     },
     {
       title: t('settings.notifications'),
       icon: Bell,
       items: [
-        { label: 'Push Notifications', action: () => {} },
-        { label: 'Email Notifications', action: () => {} },
-        { label: 'Workout Reminders', action: () => {} },
+        { 
+          label: t('settings.notification_settings'), 
+          component: NotificationSettingsModal,
+          description: 'Manage push, email, and reminder settings'
+        },
       ]
     },
     {
       title: t('settings.integrations'),
       icon: Link,
       items: [
-        { label: 'Apple Health', action: () => {} },
-        { label: 'Google Fit', action: () => {} },
-        { label: 'Fitness Trackers', action: () => {} },
+        { 
+          label: t('settings.integration_settings'), 
+          component: IntegrationSettingsModal,
+          description: 'Connect with Apple Health, Google Fit, and more'
+        },
       ]
     },
     {
       title: t('settings.privacy'),
       icon: Shield,
       items: [
-        { label: 'Data & Privacy', action: () => {} },
-        { label: 'Account Security', action: () => {} },
-        { label: 'Delete Account', action: () => {} },
+        { 
+          label: t('settings.data_privacy'), 
+          action: () => console.log('Data privacy'),
+          description: 'Manage your data and privacy settings'
+        },
+        { 
+          label: t('settings.account_security'), 
+          action: () => console.log('Account security'),
+          description: 'Password, 2FA, and security settings'
+        },
       ]
     },
   ];
@@ -83,7 +106,7 @@ const Settings = () => {
             <CardContent>
               <div className="space-y-3">
                 <p className="text-sm text-muted-foreground">
-                  Choose your preferred language for the app interface
+                  {t('settings.language_description')}
                 </p>
                 <Select value={language} onValueChange={setLanguage}>
                   <SelectTrigger className="w-full">
@@ -111,18 +134,46 @@ const Settings = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
-                    {section.items.map((item) => (
-                      <Button
-                        key={item.label}
-                        variant="ghost"
-                        className="w-full justify-start h-auto p-3"
-                        onClick={item.action}
-                      >
-                        <div className="text-left">
-                          <div className="font-medium">{item.label}</div>
-                        </div>
-                      </Button>
-                    ))}
+                    {section.items.map((item) => {
+                      const ItemComponent = item.component;
+                      return ItemComponent ? (
+                        <ItemComponent key={item.label}>
+                          <Button
+                            variant="ghost"
+                            className="w-full justify-between h-auto p-3 group"
+                            disabled={loading}
+                          >
+                            <div className="text-left flex-1">
+                              <div className="font-medium">{item.label}</div>
+                              {item.description && (
+                                <div className="text-sm text-muted-foreground mt-0.5">
+                                  {item.description}
+                                </div>
+                              )}
+                            </div>
+                            <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                          </Button>
+                        </ItemComponent>
+                      ) : (
+                        <Button
+                          key={item.label}
+                          variant="ghost"
+                          className="w-full justify-between h-auto p-3 group"
+                          onClick={item.action}
+                          disabled={loading}
+                        >
+                          <div className="text-left flex-1">
+                            <div className="font-medium">{item.label}</div>
+                            {item.description && (
+                              <div className="text-sm text-muted-foreground mt-0.5">
+                                {item.description}
+                              </div>
+                            )}
+                          </div>
+                          <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                        </Button>
+                      );
+                    })}
                   </div>
                 </CardContent>
               </Card>
@@ -144,6 +195,7 @@ const Settings = () => {
                     variant="destructive" 
                     onClick={handleSignOut}
                     className="w-full"
+                    disabled={loading}
                   >
                     Sign Out
                   </Button>

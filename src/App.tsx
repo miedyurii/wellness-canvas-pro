@@ -8,6 +8,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { I18nProvider } from "@/contexts/I18nContext";
 import { UserGoalsProvider } from "@/contexts/UserGoalsContext";
 import { NutritionProvider } from "@/contexts/NutritionContext";
+import { SettingsProvider } from "@/contexts/SettingsContext";
 import Index from "./pages/Index";
 import History from "./pages/History";
 import Dashboard from "./pages/Dashboard";
@@ -28,6 +29,7 @@ const App = () => (
           <AuthProvider>
             <UserGoalsProvider>
               <NutritionProvider>
+                <SettingsProvider>
                 <Toaster />
                 <Sonner />
                 <BrowserRouter>
@@ -44,6 +46,7 @@ const App = () => (
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </BrowserRouter>
+                </SettingsProvider>
               </NutritionProvider>
             </UserGoalsProvider>
           </AuthProvider>

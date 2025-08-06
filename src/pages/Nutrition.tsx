@@ -1,5 +1,5 @@
 import React from 'react';
-import { NutritionTracker } from '@/components/NutritionTracker';
+import { EnhancedNutritionTracker } from '@/components/nutrition/EnhancedNutritionTracker';
 import { BottomNavigation } from '@/components/BottomNavigation';
 import { useI18n } from '@/contexts/I18nContext';
 import { Apple } from 'lucide-react';
@@ -20,7 +20,7 @@ const Nutrition = () => {
           </div>
         </div>
 
-        <NutritionTracker />
+        <EnhancedNutritionTracker />
       </div>
       <BottomNavigation />
     </div>
