@@ -4,13 +4,16 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Heart, Mail, Lock, User } from 'lucide-react';
+import { Heart, Mail, Lock, User, AlertCircle } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Navigate } from 'react-router-dom';
+import { signInSchema, signUpSchema, validateAndSanitize } from '@/lib/validation';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export const AuthPage = () => {
   const { signUp, signIn, user } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -33,8 +36,11 @@ export const AuthPage = () => {
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
+    setValidationErrors([]);
     
-    if (formData.password !== formData.confirmPassword) {
+    const validation = validateAndSanitize(signUpSchema, formData);
+    if (!validation.success) {
+      setValidationErrors(validation.errors || []);
       return;
     }
 
@@ -48,6 +54,18 @@ export const AuthPage = () => {
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
+    setValidationErrors([]);
+    
+    const validation = validateAndSanitize(signInSchema, {
+      email: formData.email,
+      password: formData.password
+    });
+    
+    if (!validation.success) {
+      setValidationErrors(validation.errors || []);
+      return;
+    }
+
     setLoading(true);
     try {
       await signIn(formData.email, formData.password);
@@ -79,6 +97,16 @@ export const AuthPage = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
+            {validationErrors.length > 0 && (
+              <Alert variant="destructive" className="mb-4">
+                <AlertCircle className="h-4 w-4" />
+                <AlertDescription>
+                  {validationErrors.map((error, index) => (
+                    <div key={index}>{error}</div>
+                  ))}
+                </AlertDescription>
+              </Alert>
+            )}
             <Tabs defaultValue="signin" className="w-full">
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="signin">Sign In</TabsTrigger>

@@ -51,6 +51,14 @@ export const performSecureSignIn = async (
   password: string
 ) => {
   try {
+    // Rate limiting check
+    const userKey = `signin_${email}`;
+    const rateLimit = checkRateLimit(userKey, 5, 15 * 60 * 1000); // 5 attempts per 15 minutes
+    
+    if (!rateLimit) {
+      throw new Error('Too many sign-in attempts. Please try again later.');
+    }
+
     // Clean up existing state
     cleanupAuthState();
     
@@ -78,4 +86,24 @@ export const performSecureSignIn = async (
   } catch (error) {
     return { data: null, error };
   }
+};
+
+// Rate limiting for sensitive operations
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+
+const checkRateLimit = (key: string, maxAttempts: number = 5, windowMs: number = 15 * 60 * 1000): boolean => {
+  const now = Date.now();
+  const record = rateLimitMap.get(key);
+  
+  if (!record || now > record.resetTime) {
+    rateLimitMap.set(key, { count: 1, resetTime: now + windowMs });
+    return true;
+  }
+  
+  if (record.count >= maxAttempts) {
+    return false;
+  }
+  
+  record.count++;
+  return true;
 };

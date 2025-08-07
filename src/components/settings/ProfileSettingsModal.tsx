@@ -4,9 +4,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useSettings } from '@/contexts/SettingsContext';
 import { useI18n } from '@/contexts/I18nContext';
-import { User } from 'lucide-react';
+import { User, AlertCircle } from 'lucide-react';
+import { profileSchema, validateAndSanitize, sanitizeInput } from '@/lib/validation';
 
 interface ProfileSettingsModalProps {
   children: React.ReactNode;
@@ -16,6 +18,7 @@ export const ProfileSettingsModal: React.FC<ProfileSettingsModalProps> = ({ chil
   const { userProfile, updateUserProfile, loading } = useSettings();
   const { t } = useI18n();
   const [open, setOpen] = useState(false);
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [formData, setFormData] = useState({
     first_name: userProfile?.first_name || '',
     last_name: userProfile?.last_name || '',
@@ -26,14 +29,21 @@ export const ProfileSettingsModal: React.FC<ProfileSettingsModalProps> = ({ chil
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setValidationErrors([]);
     
-    const updateData: any = {
-      first_name: formData.first_name || null,
-      last_name: formData.last_name || null,
+    const updateData = {
+      first_name: formData.first_name ? sanitizeInput(formData.first_name) : null,
+      last_name: formData.last_name ? sanitizeInput(formData.last_name) : null,
       age: formData.age ? parseInt(formData.age.toString()) : null,
       gender: formData.gender || null,
       height_cm: formData.height_cm ? parseFloat(formData.height_cm.toString()) : null,
     };
+
+    const validation = validateAndSanitize(profileSchema, updateData);
+    if (!validation.success) {
+      setValidationErrors(validation.errors || []);
+      return;
+    }
 
     await updateUserProfile(updateData);
     setOpen(false);
@@ -55,6 +65,16 @@ export const ProfileSettingsModal: React.FC<ProfileSettingsModalProps> = ({ chil
             {t('settings.edit_profile')}
           </DialogTitle>
         </DialogHeader>
+        {validationErrors.length > 0 && (
+          <Alert variant="destructive">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription>
+              {validationErrors.map((error, index) => (
+                <div key={index}>{error}</div>
+              ))}
+            </AlertDescription>
+          </Alert>
+        )}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
