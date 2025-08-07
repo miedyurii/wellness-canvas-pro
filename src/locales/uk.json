@@ -177,10 +177,10 @@
     "body_fat": "Жир в організмі",
     "notes": "Примітки",
     "save_measurement": "Зберегти вимірювання",
-    "progress_chart": "Графік прогресу",
+    "progress_chart": "Прогрес ІМТ",
     "last_7_measurements": "Останні 7 вимірювань",
     "no_data": "Немає даних для відображення",
-    "add_first_measurement": "Додайте ваше перше вимірювання"
+    "add_first_measurement": "Додайте ваше перше вимірювання для відстеження прогресу"
   },
   "health": {
     "measurements": "Вимірювання",

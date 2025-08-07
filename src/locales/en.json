@@ -119,5 +119,12 @@
     "dashboard": "Dashboard",
     "analytics": "Analytics",
     "settings": "Settings"
+  },
+  "bmi": {
+    "title": "BMI Calculator",
+    "progress_chart": "BMI Progress",
+    "last_7_measurements": "Last 7 measurements",
+    "no_data": "No data available",
+    "add_first_measurement": "Add your first measurement to see progress"
   }
 }
