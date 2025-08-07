@@ -1,1 +1,18 @@
 project_id = "yndzwstirqaeigyjbhjm"
+
+[auth]
+enabled = true
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["https://localhost:3000"]
+jwt_expiry = 3600
+refresh_token_rotation_enabled = true
+security_captcha_enabled = false
+
+[auth.email]
+enable_signup = true
+double_confirm_changes = false
+enable_confirmations = true
+max_frequency = "1s"
+
+[functions.delete-user-account]
+verify_jwt = true

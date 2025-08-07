@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Label } from '@/components/ui/label';
 import { BottomNavigation } from '@/components/BottomNavigation';
 import { useI18n } from '@/contexts/I18nContext';
 import { useAuth } from '@/contexts/AuthContext';
@@ -12,7 +13,10 @@ import { IntegrationSettingsModal } from '@/components/settings/IntegrationSetti
 import { HealthGoalsModal } from '@/components/settings/HealthGoalsModal';
 import { PrivacyPolicyModal } from '@/components/settings/PrivacyPolicyModal';
 import { TermsOfServiceModal } from '@/components/settings/TermsOfServiceModal';
-import { Settings as SettingsIcon, User, Bell, Globe, Shield, Link, ChevronRight } from 'lucide-react';
+import { AccountDeletionModal } from '@/components/settings/AccountDeletionModal';
+import { MFAModal } from '@/components/settings/MFAModal';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { Settings as SettingsIcon, User, Bell, Globe, Shield, Link, ChevronRight, Trash2, Palette } from 'lucide-react';
 
 const Settings = () => {
   const { t, language, setLanguage } = useI18n();
@@ -71,6 +75,11 @@ const Settings = () => {
       icon: Shield,
       items: [
         { 
+          label: t('settings.mfa'), 
+          component: MFAModal,
+          description: t('settings.mfa_description')
+        },
+        { 
           label: 'Privacy Policy', 
           component: PrivacyPolicyModal,
           description: 'Review our privacy policy and data handling'
@@ -98,28 +107,51 @@ const Settings = () => {
         </div>
 
         <div className="space-y-6">
-          {/* Language Settings */}
+          {/* Language & Theme Settings */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Globe className="w-5 h-5" />
-                {t('settings.language')}
+                <Palette className="w-5 h-5" />
+                Preferences
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-3">
-                <p className="text-sm text-muted-foreground">
-                  {t('settings.language_description')}
-                </p>
-                <Select value={language} onValueChange={setLanguage}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="en">English</SelectItem>
-                    <SelectItem value="ru">Русский (Russian)</SelectItem>
-                  </SelectContent>
-                </Select>
+              <div className="space-y-6">
+                {/* Language Selection */}
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <Globe className="w-4 h-4" />
+                    <Label className="text-sm font-medium">{t('settings.language')}</Label>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    {t('settings.language_description')}
+                  </p>
+                  <Select value={language} onValueChange={setLanguage}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="en">English</SelectItem>
+                      <SelectItem value="ru">Русский (Russian)</SelectItem>
+                      <SelectItem value="uk">Українська (Ukrainian)</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Theme Toggle */}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <Label className="text-sm font-medium">{t('settings.theme')}</Label>
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        {t('settings.theme_description')}
+                      </p>
+                    </div>
+                    <ThemeToggle />
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -172,18 +204,30 @@ const Settings = () => {
                 <CardTitle>Account</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <div className="text-sm text-muted-foreground">
                     Signed in as: {user.email}
                   </div>
-                  <Button 
-                    variant="destructive" 
-                    onClick={handleSignOut}
-                    className="w-full"
-                    disabled={loading}
-                  >
-                    Sign Out
-                  </Button>
+                  <div className="space-y-2">
+                    <Button 
+                      variant="outline" 
+                      onClick={handleSignOut}
+                      className="w-full"
+                      disabled={loading}
+                    >
+                      Sign Out
+                    </Button>
+                    <AccountDeletionModal>
+                      <Button 
+                        variant="destructive" 
+                        className="w-full gap-2"
+                        disabled={loading}
+                      >
+                        <Trash2 className="w-4 h-4" />
+                        {t('settings.delete_account')}
+                      </Button>
+                    </AccountDeletionModal>
+                  </div>
                 </div>
               </CardContent>
             </Card>

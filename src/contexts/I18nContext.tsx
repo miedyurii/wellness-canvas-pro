@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-type Language = 'en' | 'ru';
+type Language = 'en' | 'ru' | 'uk';
 
 interface I18nContextType {
   language: Language;
@@ -17,18 +17,21 @@ interface Translations {
 const translations: Record<Language, Translations> = {
   en: {} as Translations,
   ru: {} as Translations,
+  uk: {} as Translations,
 };
 
 // Load translations
 const loadTranslations = async () => {
   try {
-    const [enTranslations, ruTranslations] = await Promise.all([
+    const [enTranslations, ruTranslations, ukTranslations] = await Promise.all([
       import('../locales/en.json'),
       import('../locales/ru.json'),
+      import('../locales/uk.json'),
     ]);
     
     translations.en = enTranslations.default;
     translations.ru = ruTranslations.default;
+    translations.uk = ukTranslations.default;
   } catch (error) {
     console.error('Failed to load translations:', error);
   }

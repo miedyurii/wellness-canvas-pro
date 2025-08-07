@@ -1,4 +1,5 @@
 import { BMICalculator } from '@/components/BMICalculator';
+import { BMIProgressChart } from '@/components/BMIProgressChart';
 import { OnboardingWizard } from '@/components/OnboardingWizard';
 import { BottomNavigation } from '@/components/BottomNavigation';
 import { useAuth } from '@/contexts/AuthContext';
@@ -40,7 +41,10 @@ const Index = () => {
           )}
         </div>
 
-        <BMICalculator />
+        <div className="space-y-6">
+          <BMICalculator />
+          {user && <BMIProgressChart />}
+        </div>
       </div>
       <BottomNavigation />
     </div>
