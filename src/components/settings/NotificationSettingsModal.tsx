@@ -18,7 +18,20 @@ export const NotificationSettingsModal: React.FC<NotificationSettingsModalProps>
 
   const handleToggle = async (key: keyof typeof notificationPrefs, value: boolean) => {
     if (!notificationPrefs) return;
-    await updateNotificationPrefs({ [key]: value });
+    
+    // Handle push notification toggle with OneSignal integration
+    if (key === 'push_notifications' && value) {
+      try {
+        // This would integrate with OneSignal to get player_id
+        // For now, we'll just update the preference
+        await updateNotificationPrefs({ [key]: value });
+      } catch (error) {
+        console.error('OneSignal integration error:', error);
+        await updateNotificationPrefs({ [key]: value });
+      }
+    } else {
+      await updateNotificationPrefs({ [key]: value });
+    }
   };
 
   if (!notificationPrefs) return null;
