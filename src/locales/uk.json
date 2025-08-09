@@ -199,7 +199,7 @@
   },
   "errors": {
     "network_error": "Помилка мережі",
-    "server_error": "Помилка сервера", 
+    "server_error": "Помилка сервера",
     "validation_error": "Помилка валідації",
     "auth_error": "Помилка автентифікації",
     "permission_denied": "Доступ заборонено",

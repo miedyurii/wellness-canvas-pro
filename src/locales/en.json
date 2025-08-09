@@ -23,7 +23,7 @@
     "step1": {
       "title": "What's your primary fitness goal?",
       "weight_loss": "Weight Loss",
-      "muscle_gain": "Muscle Gain", 
+      "muscle_gain": "Muscle Gain",
       "maintain": "Maintain Current Weight",
       "endurance": "Build Endurance"
     },
@@ -58,7 +58,7 @@
     "daily_goals": "Daily Goals",
     "calories": "Calories",
     "protein": "Protein",
-    "carbs": "Carbs", 
+    "carbs": "Carbs",
     "fat": "Fat",
     "fiber": "Fiber",
     "sugar": "Sugar",
@@ -115,10 +115,11 @@
   },
   "nav": {
     "home": "Home",
-    "history": "History", 
+    "history": "History",
     "dashboard": "Dashboard",
     "analytics": "Analytics",
-    "settings": "Settings"
+    "settings": "Settings",
+    "nutrition": "Nutrition"
   },
   "bmi": {
     "title": "BMI Calculator",

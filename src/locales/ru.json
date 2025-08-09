@@ -118,7 +118,8 @@
     "history": "История",
     "dashboard": "Панель",
     "analytics": "Аналитика",
-    "settings": "Настройки"
+    "settings": "Настройки",
+    "nutrition": "Nutrition"
   },
   "bmi": {
     "title": "Калькулятор ИМТ",

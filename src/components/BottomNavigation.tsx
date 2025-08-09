@@ -8,9 +8,9 @@ export const BottomNavigation = () => {
   
   const navigationItems = [
     { icon: Calculator, label: t('nav.home'), href: '/' },
-    { icon: Apple, label: 'Nutrition', href: '/nutrition' },
+    { icon: Apple, label: t('nav.nutrition'), href: '/nutrition' },
     { icon: BarChart3, label: t('nav.analytics'), href: '/analytics' },
-    { icon: TrendingUp, label: 'Dashboard', href: '/dashboard' },
+    { icon: TrendingUp, label: t('nav.dashboard'), href: '/dashboard' },
     { icon: Settings, label: t('nav.settings'), href: '/settings' },
   ];
 
