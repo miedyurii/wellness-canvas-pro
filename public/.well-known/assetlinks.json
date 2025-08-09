@@ -4,7 +4,9 @@
     "target": {
       "namespace": "android_app",
       "package_name": "online.trackyourhealth.app",
-      "sha256_cert_fingerprints": ["SHA256: 3F:01:C6:37:D6:F0:41:64:E4:DD:DC:8D:69:FF:96:B6:E6:73:03:0C:1A:96:70:B4:FB:55:8B:CA:06:54:DF:10"]
+      "sha256_cert_fingerprints": [
+        "3F:01:C6:37:D6:F0:41:64:E4:DD:DC:8D:69:FF:96:B6:E6:73:03:0C:1A:96:70:B4:FB:55:8B:CA:06:54:DF:10"
+      ]
     }
   }
 ]
